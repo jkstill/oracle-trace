@@ -1,0 +1,75 @@
+SQL> desc dbms_monitor
+PROCEDURE CLIENT_ID_STAT_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ CLIENT_ID                      VARCHAR2                IN
+PROCEDURE CLIENT_ID_STAT_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ CLIENT_ID                      VARCHAR2                IN
+PROCEDURE CLIENT_ID_TRACE_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ CLIENT_ID                      VARCHAR2                IN
+PROCEDURE CLIENT_ID_TRACE_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ CLIENT_ID                      VARCHAR2                IN
+ WAITS                          BOOLEAN                 IN     DEFAULT
+ BINDS                          BOOLEAN                 IN     DEFAULT
+ PLAN_STAT                      VARCHAR2                IN     DEFAULT
+PROCEDURE DATABASE_TRACE_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ INSTANCE_NAME                  VARCHAR2                IN     DEFAULT
+PROCEDURE DATABASE_TRACE_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ WAITS                          BOOLEAN                 IN     DEFAULT
+ BINDS                          BOOLEAN                 IN     DEFAULT
+ INSTANCE_NAME                  VARCHAR2                IN     DEFAULT
+ PLAN_STAT                      VARCHAR2                IN     DEFAULT
+PROCEDURE SERV_MOD_ACT_STAT_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SERVICE_NAME                   VARCHAR2                IN
+ MODULE_NAME                    VARCHAR2                IN
+ ACTION_NAME                    VARCHAR2                IN     DEFAULT
+PROCEDURE SERV_MOD_ACT_STAT_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SERVICE_NAME                   VARCHAR2                IN
+ MODULE_NAME                    VARCHAR2                IN
+ ACTION_NAME                    VARCHAR2                IN     DEFAULT
+PROCEDURE SERV_MOD_ACT_TRACE_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SERVICE_NAME                   VARCHAR2                IN
+ MODULE_NAME                    VARCHAR2                IN     DEFAULT
+ ACTION_NAME                    VARCHAR2                IN     DEFAULT
+ INSTANCE_NAME                  VARCHAR2                IN     DEFAULT
+PROCEDURE SERV_MOD_ACT_TRACE_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SERVICE_NAME                   VARCHAR2                IN
+ MODULE_NAME                    VARCHAR2                IN     DEFAULT
+ ACTION_NAME                    VARCHAR2                IN     DEFAULT
+ WAITS                          BOOLEAN                 IN     DEFAULT
+ BINDS                          BOOLEAN                 IN     DEFAULT
+ INSTANCE_NAME                  VARCHAR2                IN     DEFAULT
+ PLAN_STAT                      VARCHAR2                IN     DEFAULT
+PROCEDURE SESSION_TRACE_DISABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SESSION_ID                     BINARY_INTEGER          IN     DEFAULT
+ SERIAL_NUM                     BINARY_INTEGER          IN     DEFAULT
+PROCEDURE SESSION_TRACE_ENABLE
+ Argument Name                  Type                    In/Out Default?
+ ------------------------------ ----------------------- ------ --------
+ SESSION_ID                     BINARY_INTEGER          IN     DEFAULT
+ SERIAL_NUM                     BINARY_INTEGER          IN     DEFAULT
+ WAITS                          BOOLEAN                 IN     DEFAULT
+ BINDS                          BOOLEAN                 IN     DEFAULT
+ PLAN_STAT                      VARCHAR2                IN     DEFAULT
+
+SQL> spool off

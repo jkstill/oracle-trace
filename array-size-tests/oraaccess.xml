@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII" ?> 
+<!--
+     Here is a sample oraaccess.xml.
+     This shows defaulting of global and connection parameters 
+     across all connections. 
+-->
+ <oraaccess xmlns="http://xmlns.oracle.com/oci/oraaccess"
+  xmlns:oci="http://xmlns.oracle.com/oci/oraaccess"
+  schemaLocation="http://xmlns.oracle.com/oci/oraaccess
+  http://xmlns.oracle.com/oci/oraaccess.xsd">
+  <default_parameters>
+    <prefetch>
+      <rows>100</rows> 
+    </prefetch>
+    <statement_cache>
+      <size>100</size> 
+    </statement_cache>
+    <result_cache>
+      <!-- <max_rset_rows>100</max_rset_rows> 
+      <max_rset_size>10K</max_rset_size> 
+      <max_size>64M</max_size>  -->
+    </result_cache>
+  </default_parameters>
+</oraaccess>

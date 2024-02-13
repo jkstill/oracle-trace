@@ -1,0 +1,397 @@
+
+*** 2024-01-16T17:52:39.428771-08:00 (PDB1(3))
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 576453 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734873496325
+EXEC #140527448017464:c=0,e=24,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734873496566
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 2 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734873496638
+FETCH #140527448017464:c=54,e=55,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734873496675
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 527911 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734874024638
+EXEC #140527448017464:c=27,e=27,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734874024786
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 1 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734874024862
+FETCH #140527448017464:c=41,e=42,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734874024899
+
+*** 2024-01-16T17:52:40.458369-08:00 (PDB1(3))
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 500975 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734874525924
+=====================
+PARSING IN CURSOR #140527448026512 len=129 dep=1 uid=0 oct=6 lid=0 tim=1734874526183 hv=1446468415 ad='9d39d948' sqlid='718d4y9b3fqtz'
+update CRC$_RESULT_CACHE_STATS                   set NAME = :1, VALUE = :2 where CACHE_ID = :3 and                   STAT_ID = :4
+END OF STMT
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=10  flg=05
+  value="Block Size"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=03  flg=01
+  value=256
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=1
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=15  flg=05
+  value="Block Count Max"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=03  flg=01
+  value=4096
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=2
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=19  flg=05
+  value="Block Count Current"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=03  flg=01
+  value=128
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=3
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=17  flg=05
+  value="Hash Bucket Count"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=03  flg=01
+  value=1024
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=4
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=20  flg=05
+  value="Create Count Success"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=5
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=20  flg=05
+  value="Create Count Failure"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=6
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=10  flg=05
+  value="Find Count"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=7
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=18  flg=05
+  value="Invalidation Count"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=8
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=20  flg=05
+  value="Delete Count Invalid"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=9
+BINDS #140527448026512:
+
+ Bind#0
+  oacdty=01 mxl=128(49) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=01 csi=873 siz=152 off=0
+  kxsbbbfp=7fcf187d50d0  bln=128  avl=18  flg=05
+  value="Delete Count Valid"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=0 off=128
+  kxsbbbfp=7fcf187d5150  bln=22  avl=01  flg=01
+  value=0
+ Bind#2
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf1e20ae48  bln=22  avl=04  flg=09
+  value=21337
+ Bind#3
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d50a0  bln=22  avl=02  flg=05
+  value=10
+EXEC #140527448026512:c=2333,e=7662,p=0,cr=15,cu=11,mis=0,r=10,dep=1,og=4,plh=1807565214,tim=1734874533808
+WAIT #140527448026512: nam='log file sync' ela= 3833 buffer#=5737 sync scn=39236637077900 p3=0 obj#=-1 tim=1734874537996
+EXEC #140527448017464:c=20,e=20,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734874538122
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 1 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734874538176
+FETCH #140527448017464:c=43,e=43,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734874538214
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 500863 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734875039127
+EXEC #140527448017464:c=22,e=22,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734875039276
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 1 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734875039330
+FETCH #140527448017464:c=41,e=42,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734875039368
+
+*** 2024-01-16T17:52:41.472655-08:00 (PDB1(3))
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 500792 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734875540210
+EXEC #140527448017464:c=22,e=22,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734875540385
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 2 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734875540460
+FETCH #140527448017464:c=54,e=54,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734875540508
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 500699 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734876041259
+EXEC #140527448017464:c=23,e=23,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=1388734953,tim=1734876041401
+WAIT #140527448017464: nam='SQL*Net message to client' ela= 0 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734876041464
+FETCH #140527448017464:c=44,e=44,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=1388734953,tim=1734876041504
+
+*** 2024-01-16T17:52:42.378124-08:00 (PDB1(3))
+WAIT #140527448017464: nam='SQL*Net message from client' ela= 404117 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734876445679
+=====================
+PARSING IN CURSOR #140527448061152 len=51 dep=1 uid=0 oct=7 lid=0 tim=1734876445914 hv=738319262 ad='95f4d5d8' sqlid='bk33kbnq03qwy'
+delete from invalidation_registry$ where regid = :1
+END OF STMT
+PARSE #140527448061152:c=30,e=30,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=3802009415,tim=1734876445914
+BINDS #140527448061152:
+
+ Bind#0
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=1000001 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf18b4a620  bln=22  avl=04  flg=05
+  value=21337
+EXEC #140527448061152:c=483,e=483,p=0,cr=2,cu=4,mis=0,r=1,dep=1,og=4,plh=3802009415,tim=1734876446633
+STAT #140527448061152 id=1 cnt=0 pid=0 pos=1 obj=0 op='DELETE  INVALIDATION_REGISTRY$ (cr=2 pr=0 pw=0 str=1 time=212 us)'
+STAT #140527448061152 id=2 cnt=1 pid=1 pos=1 obj=8179 op='INDEX RANGE SCAN I_INVALIDATION_REGISTRY$ (cr=2 pr=0 pw=0 str=1 time=19 us cost=1 size=5 card=1)'
+CLOSE #140527448061152:c=0,e=18,dep=1,type=1,tim=1734876447051
+=====================
+PARSING IN CURSOR #140527445822576 len=130 dep=1 uid=0 oct=3 lid=0 tim=1734876447419 hv=1799418247 ad='9a114838' sqlid='6cqsht9pn1wc7'
+select queryid, fromList from chnf$_queries where queryid IN     (select unique(queryId) from chnf$_reg_queries where regid = :1)
+END OF STMT
+PARSE #140527445822576:c=0,e=30,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=1185788560,tim=1734876447419
+WAIT #140527445822576: nam='PGA memory operation' ela= 30 p1=131072 p2=1 p3=0 obj#=-1 tim=1734876447689
+BINDS #140527445822576:
+
+ Bind#0
+  oacdty=02 mxl=22(21) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187d4410  bln=22  avl=04  flg=05
+  value=21337
+EXEC #140527445822576:c=108,e=380,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=1185788560,tim=1734876448010
+FETCH #140527445822576:c=18,e=18,p=0,cr=1,cu=0,mis=0,r=0,dep=1,og=4,plh=1185788560,tim=1734876448104
+STAT #140527445822576 id=1 cnt=0 pid=0 pos=1 obj=0 op='HASH JOIN  (cr=1 pr=0 pw=0 str=1 time=27 us cost=4 size=23 card=1)'
+STAT #140527445822576 id=2 cnt=0 pid=1 pos=1 obj=0 op='NESTED LOOPS  (cr=1 pr=0 pw=0 str=1 time=24 us cost=4 size=23 card=1)'
+STAT #140527445822576 id=3 cnt=0 pid=2 pos=1 obj=0 op='NESTED LOOPS  (cr=1 pr=0 pw=0 str=1 time=22 us cost=4 size=23 card=1)'
+STAT #140527445822576 id=4 cnt=0 pid=3 pos=1 obj=0 op='STATISTICS COLLECTOR  (cr=1 pr=0 pw=0 str=1 time=21 us)'
+STAT #140527445822576 id=5 cnt=0 pid=4 pos=1 obj=0 op='VIEW  VW_NSO_1 (cr=1 pr=0 pw=0 str=1 time=21 us cost=2 size=13 card=1)'
+STAT #140527445822576 id=6 cnt=0 pid=5 pos=1 obj=0 op='SORT UNIQUE (cr=1 pr=0 pw=0 str=1 time=20 us)'
+STAT #140527445822576 id=7 cnt=0 pid=6 pos=1 obj=8203 op='TABLE ACCESS BY INDEX ROWID BATCHED CHNF$_REG_QUERIES (cr=1 pr=0 pw=0 str=1 time=12 us cost=2 size=8 card=1)'
+STAT #140527445822576 id=8 cnt=0 pid=7 pos=1 obj=8205 op='INDEX RANGE SCAN I2_CHNF$_REG_QUERIES (cr=1 pr=0 pw=0 str=1 time=12 us cost=1 size=0 card=1)'
+STAT #140527445822576 id=9 cnt=0 pid=3 pos=2 obj=8212 op='INDEX RANGE SCAN I2_CHNF$_QUERIES (cr=0 pr=0 pw=0 str=0 time=0 us cost=0 size=0 card=1)'
+STAT #140527445822576 id=10 cnt=0 pid=2 pos=2 obj=8206 op='TABLE ACCESS BY INDEX ROWID CHNF$_QUERIES (cr=0 pr=0 pw=0 str=0 time=0 us cost=1 size=10 card=1)'
+STAT #140527445822576 id=11 cnt=0 pid=1 pos=2 obj=8206 op='TABLE ACCESS FULL CHNF$_QUERIES (cr=0 pr=0 pw=0 str=0 time=0 us cost=1 size=10 card=1)'
+CLOSE #140527445822576:c=17,e=17,dep=1,type=1,tim=1734876449922
+=====================
+PARSING IN CURSOR #140527445821280 len=47 dep=1 uid=0 oct=7 lid=0 tim=1734876449974 hv=2613689169 ad='d1f8b728' sqlid='9a4sm4kdwmfuj'
+delete from chnf$_reg_queries where regid = :1
+END OF STMT
+PARSE #140527445821280:c=12,e=12,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=4154967531,tim=1734876449974
+BINDS #140527445821280:
+
+ Bind#0
+  oacdty=02 mxl=22(21) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf187cbad0  bln=22  avl=04  flg=05
+  value=21337
+EXEC #140527445821280:c=234,e=234,p=0,cr=1,cu=0,mis=0,r=0,dep=1,og=4,plh=4154967531,tim=1734876450413
+STAT #140527445821280 id=1 cnt=0 pid=0 pos=1 obj=0 op='DELETE  CHNF$_REG_QUERIES (cr=1 pr=0 pw=0 str=1 time=3 us)'
+STAT #140527445821280 id=2 cnt=0 pid=1 pos=1 obj=8205 op='INDEX RANGE SCAN I2_CHNF$_REG_QUERIES (cr=1 pr=0 pw=0 str=1 time=3 us cost=1 size=8 card=1)'
+WAIT #140527445821280: nam='reliable message' ela= 626 channel context=4558595632 channel handle=4558346216 broadcast message=4531902264 obj#=-1 tim=1734876451807
+CLOSE #140527445821280:c=0,e=43,dep=1,type=1,tim=1734876452034
+=====================
+PARSING IN CURSOR #140527445819984 len=55 dep=1 uid=0 oct=7 lid=0 tim=1734876452118 hv=131512262 ad='aa6769b8' sqlid='8ngh5ms3xddy6'
+delete from CRC$_RESULT_CACHE_STATS where CACHE_ID = :1
+END OF STMT
+PARSE #140527445819984:c=50,e=34,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=3890562903,tim=1734876452117
+BINDS #140527445819984:
+
+ Bind#0
+  oacdty=02 mxl=22(04) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0000 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7ffc3a9aea60  bln=22  avl=04  flg=09
+  value=21337
+EXEC #140527445819984:c=393,e=393,p=0,cr=2,cu=31,mis=0,r=10,dep=1,og=4,plh=3890562903,tim=1734876452697
+STAT #140527445819984 id=1 cnt=0 pid=0 pos=1 obj=0 op='DELETE  CRC$_RESULT_CACHE_STATS (cr=2 pr=0 pw=0 str=1 time=133 us)'
+STAT #140527445819984 id=2 cnt=10 pid=1 pos=1 obj=9010 op='INDEX RANGE SCAN CRC$_RCSTATSPK (cr=2 pr=0 pw=0 str=1 time=17 us cost=2 size=80 card=10)'
+WAIT #140527445819984: nam='DLM cross inst call completion' ela= 4 caller instance number=1 cluster incarnation number=4 request identifier=1654332 obj#=-1 tim=1734876453395
+WAIT #140527445819984: nam='DLM cross inst call completion' ela= 406 caller instance number=1 cluster incarnation number=4 request identifier=1654332 obj#=-1 tim=1734876453904
+=====================
+PARSING IN CURSOR #140527445782752 len=97 dep=1 uid=0 oct=3 lid=0 tim=1734876454021 hv=2811203238 ad='e4570930' sqlid='0vv5mmymsz3p6'
+select user# from reg$ where location_name = :1 and  (subscription_name != :2 or namespace != :3)
+END OF STMT
+PARSE #140527445782752:c=14,e=14,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=94788420,tim=1734876454021
+BINDS #140527445782752:
+
+ Bind#0
+  oacdty=01 mxl=32(12) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0001 frm=01 csi=873 siz=88 off=0
+  kxsbbbfp=7fcf18819fa8  bln=32  avl=12  flg=05
+  value="net8://?PR=0"
+ Bind#1
+  oacdty=01 mxl=32(09) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0001 frm=01 csi=873 siz=0 off=32
+  kxsbbbfp=7fcf18819fc8  bln=32  avl=09  flg=01
+  value="CHNF21337"
+ Bind#2
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=1000001 frm=00 csi=00 siz=0 off=64
+  kxsbbbfp=7fcf18819fe8  bln=22  avl=02  flg=01
+  value=2
+EXEC #140527445782752:c=545,e=545,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=94788420,tim=1734876454842
+FETCH #140527445782752:c=31,e=30,p=0,cr=3,cu=0,mis=0,r=1,dep=1,og=4,plh=94788420,tim=1734876454931
+STAT #140527445782752 id=1 cnt=1 pid=0 pos=1 obj=8418 op='TABLE ACCESS FULL REG$ (cr=3 pr=0 pw=0 str=1 time=30 us cost=8 size=9114 card=294)'
+CLOSE #140527445782752:c=0,e=268,dep=1,type=1,tim=1734876455245
+=====================
+PARSING IN CURSOR #140527445781112 len=64 dep=1 uid=0 oct=7 lid=0 tim=1734876455312 hv=3048294367 ad='9366bbd8' sqlid='gmm593quv2jyz'
+delete from reg$ where subscription_name = :1 and namespace = :2
+END OF STMT
+PARSE #140527445781112:c=0,e=12,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=4,plh=4090815212,tim=1734876455311
+BINDS #140527445781112:
+
+ Bind#0
+  oacdty=01 mxl=32(09) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=10 fl2=0001 frm=01 csi=873 siz=32 off=0
+  kxsbbbfp=d8b8a568  bln=32  avl=09  flg=09
+  value="CHNF21337"
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=1000001 frm=00 csi=00 siz=24 off=0
+  kxsbbbfp=7fcf18b59fe8  bln=22  avl=02  flg=05
+  value=2
+EXEC #140527445781112:c=0,e=502,p=0,cr=2,cu=4,mis=0,r=1,dep=1,og=4,plh=4090815212,tim=1734876456012
+STAT #140527445781112 id=1 cnt=0 pid=0 pos=1 obj=0 op='DELETE  REG$ (cr=2 pr=0 pw=0 str=1 time=95 us)'
+STAT #140527445781112 id=2 cnt=1 pid=1 pos=1 obj=8421 op='INDEX RANGE SCAN REG$_IDX (cr=2 pr=0 pw=0 str=1 time=14 us cost=2 size=33 card=1)'
+CLOSE #140527445781112:c=0,e=2,dep=1,type=1,tim=1734876456462
+WAIT #0: nam='reliable message' ela= 416 channel context=4558640944 channel handle=4558344824 broadcast message=1947097504 obj#=-1 tim=1734876456985
+WAIT #0: nam='reliable message' ela= 254 channel context=4558640944 channel handle=4558344824 broadcast message=1947096712 obj#=-1 tim=1734876457536
+WAIT #0: nam='DLM cross inst call completion' ela= 15 caller instance number=1 cluster incarnation number=4 request identifier=1654333 obj#=-1 tim=1734876457687
+WAIT #0: nam='DLM cross inst call completion' ela= 245 caller instance number=1 cluster incarnation number=4 request identifier=1654333 obj#=-1 tim=1734876457975
+CLOSE #140527445819984:c=17,e=18,dep=0,type=0,tim=1734876458099
+WAIT #0: nam='PGA memory operation' ela= 87 p1=0 p2=0 p3=0 obj#=-1 tim=1734876458253
+WAIT #0: nam='SQL*Net message to client' ela= 1 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734876458299
+WAIT #0: nam='SQL*Net message from client' ela= 356 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=1734876458695
+XCTEND rlbk=0, rd_only=1, tim=1734876458763
+CLOSE #140527448290192:c=1,e=2,dep=0,type=0,tim=1734876458814
+CLOSE #140527448017464:c=1,e=2,dep=0,type=0,tim=1734876458855
+CLOSE #140527448026512:c=1,e=1,dep=0,type=0,tim=1734876458894
+CLOSE #140527448298456:c=1,e=1,dep=0,type=0,tim=1734876458932
+CLOSE #140527448318456:c=0,e=1,dep=0,type=0,tim=1734876458969

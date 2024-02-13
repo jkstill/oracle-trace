@@ -1,0 +1,4 @@
+s/'0'/\'REDACTED'/g
+s/'HARD-CODE-01'/\'REDACTED'/g
+s/'HARD-CODE,02 '/\'REDACTED'/g
+s/'	HARD.CODE-03'/\'REDACTED'/g

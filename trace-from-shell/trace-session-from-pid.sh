@@ -57,7 +57,7 @@ function scriptLock	 {
 		return 0
 	else
 		echo "Failed to acquire $LOCKFILE. Held by $(cat $LOCKFILE)"
-		exit 1
+		return 1
 	fi
 }
 
@@ -79,7 +79,10 @@ logFile=$logDir/trace-session-${pid}-$(date +%Y-%m-%d_%H-%M-%S).log
 exec 1> >(tee -ia $logFile)
 exec 2> >(tee -ia $logFile >&2)
 
+
 scriptLock $LOCKFILE
+lockResult=$?
+[[ $lockResult != 0 ]] && { echo "could not acquire lock - lockfile: $LOCKFILE"; scriptUnlock; exit 1; }
 
 sqlplus -S /nolog  <<-EOF
 

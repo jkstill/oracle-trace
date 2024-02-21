@@ -7,6 +7,7 @@ usage () {
 -c command to look for (uses cmd + wildcard internally)
 -s seconds to run trace
 -o Oracle SID - no checking done, is assumed correct.
+-p copy dir - the trace destination
 -d display only - just show sessions
 -h help
 
@@ -16,7 +17,7 @@ EOF
 
 displayOnly='N'
 
-while getopts u:c:s:o:dh arg
+while getopts u:c:s:o:p:dh arg
 do
 	case $arg in
 		h) usage; exit;;
@@ -24,6 +25,7 @@ do
 		s) traceSeconds=$OPTARG;;
 		c) cmdToCheck=$OPTARG;;
 		o) testOracleSID=$OPTARG;;
+		p) copyDir=$OPTARG;;
 		d) displayOnly='Y';;
 	esac
 done
@@ -32,6 +34,7 @@ done
 [[ -z $username ]] && { usage; exit 2; }
 [[ -z $cmdToCheck ]] && { usage; exit 3; }
 [[ -z $testOracleSID ]] && { usage; exit 4; }
+[[ -z $copyDir ]] && { usage; exit 4; }
 
 #upper case username
 username=${username^^}
@@ -111,11 +114,11 @@ do
 
 	# setup the trace
 	echo "tracing oraclePID: $oraclePID for $traceSeconds seconds"
-	nohup ./trace-session-from-pid.sh  $sessionOracleSID $oraclePID $traceSeconds &
-	[[ $? -ne 0 ]] && { die "Host: $HOSTNAME Oracle SID: $ORACLE_SID: called nohup ./trace-session-from-pid.sh  $sessionOracleSID $oraclePID $traceSeconds"; }
+	./trace-session-from-pid.sh  $sessionOracleSID $oraclePID $traceSeconds &
+	[[ $? -ne 0 ]] && { die "Host: $HOSTNAME Oracle SID: $ORACLE_SID: called ./trace-session-from-pid.sh  $sessionOracleSID $oraclePID $traceSeconds"; }
 
 	echo "Host: $HOSTNAME Oracle SID: $sessionOracleSID: tracefile: $traceFileName osPID: $osPID" \
 		| mailx -s "$cmdToCheck trace" $emailAddressList
 
-done < <(./show-cmd.sh $testOracleSID $username $cmdToCheck)
+done < <(./show-cmd.sh $ORACLE_SID $username $cmdToCheck)
 

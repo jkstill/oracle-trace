@@ -15,9 +15,6 @@ ToDo: gracefully exit early if the traced session exits
 COMMENTS
 
 emailAddressList=' still@pythian.com  jstill@pplweb.com '
-# set to the location where the trace file is to be copied
-#copyDest='/mnt/zips/tmp/oracle/oracle-trace/copy'
-copyDest='/u80/trace/CSRIPRD'
 
 usage () {
 	cat <<-EOF
@@ -27,6 +24,7 @@ usage () {
 -s seconds to run trace
 -t seconds between trace file truncates
 -o Oracle SID - no checking done, is assumed correct.
+-p copy dir - the trace destination
 -d display only - just show sessions
 -h help
 
@@ -36,7 +34,7 @@ EOF
 
 displayOnly='N'
 
-while getopts u:c:s:t:o:dh arg
+while getopts u:c:s:t:o:p:dh arg
 do
 	case $arg in
 		h) usage; exit;;
@@ -45,6 +43,7 @@ do
 		t) truncateInterval=$OPTARG;;
 		c) cmdToCheck=$OPTARG;;
 		o) testOracleSID=$OPTARG;;
+		p) copyDir=$OPTARG;;
 		d) displayOnly='Y';;
 	esac
 done
@@ -55,6 +54,7 @@ done
 [[ -z $username ]] && { usage; exit 3; }
 [[ -z $cmdToCheck ]] && { usage; exit 4; }
 [[ -z $testOracleSID ]] && { usage; exit 5; }
+[[ -z $copyDir ]] && { usage; exit 6; }
 
 #upper case username
 username=${username^^}
@@ -62,6 +62,21 @@ username=${username^^}
 PATH=/usr/local/bin/:$PATH; export PATH
 export testOracleSID
 . oraenv <<< $testOracleSID > /dev/null
+
+# set to the location where the trace file is to be copied
+#copyDest='/mnt/zips/tmp/oracle/oracle-trace/copy'
+copyDest="$copyDir/$ORACLE_SID"
+
+mkdir -p $copyDest
+
+[[ -w $copyDest ]] || {
+	echo
+	echo "cannot read $copyDest"
+	echo "ls follows - it may not exist"
+	ls -ld $copyDest
+	echo
+	exit 1
+}
 
 
 : << 'COMMENTS'
@@ -118,14 +133,6 @@ while read osPID oraclePID CMD
 do
 	banner "Oracle PID: $oraclePID  CMD: $CMD"
 
-	# get session ORACLE_SID
-	sessionOracleSID=$(sudo strings /proc/$osPID/environ | grep ORACLE_SID | cut -f2 -d=)
-	echo "  Session Oracle SID: $sessionOracleSID"
-
-	#. /usr/local/bin/oraenv <<< $sessionOracleSID > /dev/null
-
-	#echo "ORACLE_SID: $ORACLE_SID"
-
 	traceFileName=$(./trace-file-from-pid.sh $ORACLE_SID $oraclePID )
 	[[ $? -ne 0 ]] && { die "Host: $HOSTNAME Oracle SID: $ORACLE_SID: called ./trace-file-from-pid.sh $ORACLE_SID $oraclePID" ; }
 	echo "  traceFileName: $traceFileName"
@@ -147,8 +154,8 @@ do
 
 	
 	dupFile="$copyDest/$baseTraceFileName"
-	echo "tail -F $traceFileName >> $dupFile "
-	tail -F $traceFileName >> $dupFile &
+	echo "timeout $traceSeconds tail -F $traceFileName >> $dupFile "
+	timeout $traceSeconds tail -F $traceFileName >> $dupFile &
 
 	rc=$?
 	dupFilePID=$!
@@ -167,9 +174,9 @@ do
 
 	# setup the trace
 	echo "tracing oraclePID: $oraclePID for $traceSeconds seconds"
-	nohup ./trace-session-from-pid-dup.sh  $sessionOracleSID $osPID $oraclePID "$traceFileName" $dupFilePID $traceSeconds $truncateInterval &
+	./trace-session-from-pid-dup.sh  $ORACLE_SID $osPID $oraclePID "$traceFileName" $dupFilePID $traceSeconds $truncateInterval &
 	rc=$?;
-	[[ $rc -ne 0 ]] && { die "Host: $HOSTNAME Oracle SID: $ORACLE_SID: called nohup ./trace-session-from-pid-dup.sh  $sessionOracleSID $oraclePID $traceSeconds"; }
+	[[ $rc -ne 0 ]] && { die "Host: $HOSTNAME Oracle SID: $ORACLE_SID: called ./trace-session-from-pid-dup.sh  $ORACLE_SID $oraclePID $traceSeconds"; }
 
 	# wait a bit for sqlplus to start up
 	#sleep 5
@@ -179,10 +186,10 @@ do
 	#echo "sqlplusPID: $sqlplusPID"
 
 
-	echo "Host: $HOSTNAME Oracle SID: $sessionOracleSID: tracefile: $traceFileName osPID: $osPID" \
+	echo "Host: $HOSTNAME Oracle SID: $ORACLE_SID: tracefile: $traceFileName osPID: $osPID" \
 		| mailx -s "$cmdToCheck trace" $emailAddressList
 
 
-done < <(./show-cmd.sh $testOracleSID $username $cmdToCheck)
+done < <(./show-cmd.sh $ORACLE_SID $username $cmdToCheck)
 
 

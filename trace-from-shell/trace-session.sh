@@ -44,7 +44,7 @@ export testOracleSID
 . oraenv <<< $testOracleSID > /dev/null
 
 
-emailAddressList=' still@pythian.com  jstill@pplweb.com '
+emailAddressList=' jkstill@gmail.com '
 
 : << 'COMMENTS'
 

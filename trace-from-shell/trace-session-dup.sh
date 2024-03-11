@@ -14,7 +14,7 @@ ToDo: gracefully exit early if the traced session exits
 
 COMMENTS
 
-emailAddressList=' still@pythian.com  jstill@pplweb.com '
+emailAddressList=' jkstill@gmail.com '
 
 usage () {
 	cat <<-EOF

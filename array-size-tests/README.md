@@ -368,3 +368,87 @@ usage: target.pl
 
 ```
 
+## Network Latency
+
+To see the effects of latency compounded with varying array sizes, it is useful to perform the tests with client that is located at varying distances from the database server.
+
+While this could be done by locating the client in various data centers, there is an easier method.
+
+The Linux utility `tc` (traffic control) can be used to simulate this.
+
+When `tc` is used to set an artificial latency, all outgoing connections will be subject to this latency.
+
+Following is how `tc` may be used to simulate a distance of ~ 100 miles, or between 5 and 6 milliseconds of latency on network interface enp0s3:
+
+current latency:
+
+```text
+[root@sqlrun tc]# ping -c 5 192.168.1.2
+PING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.
+64 bytes from 192.168.1.2: icmp_seq=1 ttl=64 time=0.189 ms
+64 bytes from 192.168.1.2: icmp_seq=2 ttl=64 time=0.254 ms
+64 bytes from 192.168.1.2: icmp_seq=3 ttl=64 time=0.218 ms
+64 bytes from 192.168.1.2: icmp_seq=4 ttl=64 time=0.218 ms
+64 bytes from 192.168.1.2: icmp_seq=5 ttl=64 time=0.269 ms
+
+--- 192.168.1.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 3999ms
+rtt min/avg/max/mdev = 0.189/0.229/0.269/0.033 ms
+```
+
+### set-6ms-delay.sh
+
+```bash
+#!/usr/bin/env bash
+
+#tc qdisc add dev enp0s3 root netem delay 20ms 5ms 25%
+#tc qdisc change dev enp0s3 root netem delay 6ms 1ms 10%
+#tc qdisc change dev enp0s3 root netem delay 6ms
+tc qdisc add dev enp0s3 root netem delay 6ms 1ms 10%
+```
+
+New latency:
+
+```text
+[root@sqlrun tc]# ping -c 5 192.168.1.2
+PING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.
+64 bytes from 192.168.1.2: icmp_seq=1 ttl=64 time=6.20 ms
+64 bytes from 192.168.1.2: icmp_seq=2 ttl=64 time=6.25 ms
+64 bytes from 192.168.1.2: icmp_seq=3 ttl=64 time=6.25 ms
+64 bytes from 192.168.1.2: icmp_seq=4 ttl=64 time=6.27 ms
+64 bytes from 192.168.1.2: icmp_seq=5 ttl=64 time=6.27 ms
+
+--- 192.168.1.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 6.209/6.253/6.273/0.089 ms
+```
+
+And to remove the artificial latency
+
+## remove-6ms-delay.sh
+
+```bash
+#!/usr/bin/env bash
+
+tc qdisc delete dev enp0s3 root
+
+```
+
+
+Latency back to normal:
+
+```text
+[root@sqlrun tc]# ping -c 5 192.168.1.2
+PING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.
+64 bytes from 192.168.1.2: icmp_seq=1 ttl=64 time=0.255 ms
+64 bytes from 192.168.1.2: icmp_seq=2 ttl=64 time=0.238 ms
+64 bytes from 192.168.1.2: icmp_seq=3 ttl=64 time=0.230 ms
+64 bytes from 192.168.1.2: icmp_seq=4 ttl=64 time=0.221 ms
+64 bytes from 192.168.1.2: icmp_seq=5 ttl=64 time=0.300 ms
+
+--- 192.168.1.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 3999ms
+rtt min/avg/max/mdev = 0.221/0.248/0.300/0.034 ms
+```
+
+

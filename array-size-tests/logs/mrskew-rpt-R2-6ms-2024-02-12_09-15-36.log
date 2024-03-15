@@ -1,0 +1,133 @@
+########################################################
+file: trace/latency-6ms/cdb1_ora_20456_PF-6ms-001.trc
+rows: 001
+
+
+       real SNMFC: 1130.387613
+      check SNMFC: 1081.118278
+  optimized SNMFC: 11.682894
+       time saved: 1118.704719
+
+
+4y53369cbbaqf:1010:31027WAIT #140216765943032: nam='SQL*Net message from client' ela= 261649 driver id=1952673792 #bytes=1 p3=0 obj#=227842 tim=3022129467259
+200,030 others                                                                                                                                               
+########################################################
+file: trace/latency-6ms/cdb1_ora_23985_PF-6ms-005.trc
+rows: 005
+
+
+       real SNMFC: 202.231175
+      check SNMFC: 190.940270
+  optimized SNMFC: 10.458225
+       time saved: 191.772950
+
+
+4y53369cbbaqf:75:1690WAIT #139838821951232: nam='SQL*Net message from client' ela= 238991 driver id=1952673792 #bytes=1 p3=0 obj#=9009 tim=3023464602335
+40,030 others                                                                                                                                           
+########################################################
+file: trace/latency-6ms/cdb2_ora_3696_PF-6ms-010.trc
+rows: 010
+
+
+       real SNMFC: 106.546428
+      check SNMFC: 101.419855
+  optimized SNMFC: 11.001032
+       time saved: 95.545396
+
+
+4y53369cbbaqf:13580:16609WAIT #140707437557696: nam='SQL*Net message from client' ela= 59784 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=3023741582305
+20,030 others                                                                                                                                            
+########################################################
+file: trace/latency-6ms/cdb1_ora_24843_PF-6ms-020.trc
+rows: 020
+
+
+       real SNMFC: 52.448641
+      check SNMFC: 51.630964
+  optimized SNMFC: 10.811073
+       time saved: 41.637568
+
+
+4y53369cbbaqf:9171:10549WAIT #139807549242312: nam='SQL*Net message from client' ela= 178726 driver id=1952673792 #bytes=1 p3=0 obj#=-1 tim=3023801308104
+10,030 others                                                                                                                                            
+########################################################
+file: trace/latency-6ms/cdb2_ora_4290_PF-6ms-050.trc
+rows: 050
+
+
+       real SNMFC: 22.010724
+      check SNMFC: 21.213501
+  optimized SNMFC: 2.455179
+       time saved: 19.555545
+
+
+4y53369cbbaqf:5552:5976WAIT #140098989442816: nam='SQL*Net message from client' ela= 35516 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023873167735
+4,020 others                                                                                                                                             
+########################################################
+file: trace/latency-6ms/cdb1_ora_25072_PF-6ms-100.trc
+rows: 100
+
+
+       real SNMFC: 11.112555
+      check SNMFC: 11.099723
+  optimized SNMFC: 2.465685
+       time saved: 8.646870
+
+
+4y53369cbbaqf:2921:3226WAIT #139695910570952: nam='SQL*Net message from client' ela= 43930 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023854132342
+2,020 others                                                                                                                                             
+########################################################
+file: trace/latency-6ms/cdb2_ora_4382_PF-6ms-200.trc
+rows: 200
+
+
+       real SNMFC: 5.502469
+      check SNMFC: 5.334703
+  optimized SNMFC: 1.342315
+       time saved: 4.160154
+
+
+4y53369cbbaqf:76:332WAIT #140036096338888: nam='SQL*Net message from client' ela= 43339 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023886939263
+1,020 others                                                                                                                                          
+########################################################
+file: trace/latency-6ms/cdb1_ora_25115_PF-6ms-300.trc
+rows: 300
+
+
+       real SNMFC: 2.785504
+      check SNMFC: 2.409528
+  optimized SNMFC: 1.109033
+       time saved: 1.676471
+
+
+4y53369cbbaqf:76:151WAIT #139903861873608: nam='SQL*Net message from client' ela= 36017 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023863002975
+700 others                                                                                                                                            
+########################################################
+file: trace/latency-6ms/cdb2_ora_4441_PF-6ms-400.trc
+rows: 400
+
+
+       real SNMFC: 4.301426
+      check SNMFC: 3.789240
+  optimized SNMFC: 1.146987
+       time saved: 3.154439
+
+
+4y53369cbbaqf:688:781WAIT #140450720799688: nam='SQL*Net message from client' ela= 99600 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023896974501
+520 others                                                                                                                                             
+########################################################
+file: trace/latency-6ms/cdb1_ora_25143_PF-6ms-500.trc
+rows: 500
+
+
+       real SNMFC: 1.717793
+      check SNMFC: 1.668792
+  optimized SNMFC: 0.645523
+       time saved: 1.072270
+
+
+4y53369cbbaqf:76:88WAIT #140415195306952: nam='SQL*Net message from client' ela= 26169 driver id=1952673792 #bytes=1 p3=0 obj#=9010 tim=3023871160338
+420 others                                                                                                                                           
+
+LogFile: logs/mrskew-rpt-R2-6ms-2024-02-12_09-15-36.log
+

@@ -1,0 +1,80 @@
+NOT setting RowCacheSize
+NOT setting ora_prefetch_rows
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac02.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25464_PF-  0,1.trc
+
+scp oracle@ora192rac02.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25464_PF-  0,1.trc ...
+scp: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25464_PF-: No such file or directory
+cp: cannot stat '0,1.trc': No such file or directory
+
+real	0m0.668s
+user	0m0.118s
+sys	0m0.038s
+./uniform-row-size.sh: line 29: --prefetch-rows: command not found
+NOT setting RowCacheSize
+NOT setting ora_prefetch_rows
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac02.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25485_PF-  0,5.trc
+
+scp oracle@ora192rac02.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25485_PF-  0,5.trc ...
+scp: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25485_PF-: No such file or directory
+cp: cannot stat '0,5.trc': No such file or directory
+
+real	0m0.556s
+user	0m0.132s
+sys	0m0.020s
+./uniform-row-size.sh: line 29: --prefetch-rows: command not found
+NOT setting RowCacheSize
+NOT setting ora_prefetch_rows
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac02.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25506_PF-  0,10.trc
+
+scp oracle@ora192rac02.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25506_PF-  0,10.trc ...
+scp: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25506_PF-: No such file or directory
+cp: cannot stat '0,10.trc': No such file or directory
+
+real	0m0.535s
+user	0m0.152s
+sys	0m0.022s
+./uniform-row-size.sh: line 29: --prefetch-rows: command not found
+NOT setting RowCacheSize
+NOT setting ora_prefetch_rows
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..
+real	0m0.144s
+user	0m0.049s
+sys	0m0.012s
+./uniform-row-size.sh: line 29: --prefetch-rows: command not found
+NOT setting RowCacheSize
+NOT setting ora_prefetch_rows
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac02.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25528_PF-  0,50.trc
+
+scp oracle@ora192rac02.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb2/trace/cdb2_ora_25528_PF-  0,50.trc ...

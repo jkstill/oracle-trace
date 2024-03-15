@@ -1,0 +1,120 @@
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 1
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.393s
+user	0m0.101s
+sys	0m0.056s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 5
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.414s
+user	0m0.142s
+sys	0m0.030s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 10
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.388s
+user	0m0.131s
+sys	0m0.026s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 20
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.439s
+user	0m0.137s
+sys	0m0.034s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 50
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.427s
+user	0m0.125s
+sys	0m0.037s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 100
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.421s
+user	0m0.110s
+sys	0m0.048s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 200
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.421s
+user	0m0.138s
+sys	0m0.017s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 300
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.402s
+user	0m0.140s
+sys	0m0.026s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 400
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.471s
+user	0m0.139s
+sys	0m0.010s
+NOT setting RowCacheSize
+setting ora_prefetch_rows = 500
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+
+real	0m0.475s
+user	0m0.121s
+sys	0m0.021s

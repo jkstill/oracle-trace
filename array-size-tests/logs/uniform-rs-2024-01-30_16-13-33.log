@@ -1,0 +1,2 @@
+./uniform-row-size.sh: line 51: syntax error near unexpected token `newline'
+./uniform-row-size.sh: line 51: `		--row-cache-size < '

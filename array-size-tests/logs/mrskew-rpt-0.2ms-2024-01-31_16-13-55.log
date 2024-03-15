@@ -1,0 +1,2 @@
+./mrskew-rpt.sh: line 93: syntax error near unexpected token `file'
+./mrskew-rpt.sh: line 93: `for trace file in $@'

@@ -1,0 +1,2 @@
+./mrskew-rpt.sh: line 51: syntax error near unexpected token `('
+./mrskew-rpt.sh: line 51: `declare -A arraySizeCompare = ('

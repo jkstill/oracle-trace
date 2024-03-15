@@ -1,0 +1,10 @@
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect
+./mrskew-snmfc-savings.sh: line 48: $( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null): ambiguous redirect

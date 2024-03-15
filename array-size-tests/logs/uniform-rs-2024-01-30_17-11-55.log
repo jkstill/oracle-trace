@@ -1,0 +1,170 @@
+setting RowCacheSize = 1
+oraPreFetchMemory: 0
+using ora_prefetch_memory 105
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14353_PF-001.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14353_PF-001.trc ...
+
+real	0m11.905s
+user	0m1.039s
+sys	0m1.567s
+setting RowCacheSize = 5
+oraPreFetchMemory: 0
+using ora_prefetch_memory 525
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14405_PF-005.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14405_PF-005.trc ...
+
+real	0m2.821s
+user	0m0.144s
+sys	0m0.509s
+setting RowCacheSize = 10
+oraPreFetchMemory: 0
+using ora_prefetch_memory 1050
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14440_PF-010.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14440_PF-010.trc ...
+
+real	0m1.605s
+user	0m0.288s
+sys	0m0.100s
+setting RowCacheSize = 20
+oraPreFetchMemory: 0
+using ora_prefetch_memory 2100
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14462_PF-020.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14462_PF-020.trc ...
+
+real	0m1.111s
+user	0m0.264s
+sys	0m0.094s
+setting RowCacheSize = 50
+oraPreFetchMemory: 0
+using ora_prefetch_memory 5250
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14482_PF-050.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14482_PF-050.trc ...
+
+real	0m0.867s
+user	0m0.162s
+sys	0m0.049s
+setting RowCacheSize = 100
+oraPreFetchMemory: 0
+using ora_prefetch_memory 10500
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14505_PF-100.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14505_PF-100.trc ...
+
+real	0m0.635s
+user	0m0.162s
+sys	0m0.051s
+setting RowCacheSize = 200
+oraPreFetchMemory: 0
+using ora_prefetch_memory 21000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14535_PF-200.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14535_PF-200.trc ...
+
+real	0m0.526s
+user	0m0.136s
+sys	0m0.026s
+setting RowCacheSize = 300
+oraPreFetchMemory: 0
+using ora_prefetch_memory 31500
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14574_PF-300.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14574_PF-300.trc ...
+
+real	0m0.551s
+user	0m0.139s
+sys	0m0.035s
+setting RowCacheSize = 400
+oraPreFetchMemory: 0
+using ora_prefetch_memory 42000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14594_PF-400.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14594_PF-400.trc ...
+
+real	0m0.548s
+user	0m0.147s
+sys	0m0.028s
+setting RowCacheSize = 500
+oraPreFetchMemory: 0
+using ora_prefetch_memory 52500
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14618_PF-500.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_14618_PF-500.trc ...
+
+real	0m0.540s
+user	0m0.126s
+sys	0m0.045s

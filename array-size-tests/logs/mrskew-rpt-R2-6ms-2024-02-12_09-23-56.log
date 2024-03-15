@@ -1,0 +1,43 @@
+########################################################
+file: trace/latency-6ms/cdb1_ora_20456_PF-6ms-001.trc
+rows: 001
+########################################################
+file: trace/latency-6ms/cdb1_ora_23985_PF-6ms-005.trc
+./mrskew-snmfc-savings-R2.sh: line 77: 1287909 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+rows: 005
+./mrskew-snmfc-savings-R2.sh: line 77: 1287921 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb2_ora_3696_PF-6ms-010.trc
+rows: 010
+./mrskew-snmfc-savings-R2.sh: line 77: 1287933 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb1_ora_24843_PF-6ms-020.trc
+rows: 020
+./mrskew-snmfc-savings-R2.sh: line 77: 1287944 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb2_ora_4290_PF-6ms-050.trc
+rows: 050
+./mrskew-snmfc-savings-R2.sh: line 77: 1287956 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb1_ora_25072_PF-6ms-100.trc
+rows: 100
+./mrskew-snmfc-savings-R2.sh: line 77: 1287971 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb2_ora_4382_PF-6ms-200.trc
+rows: 200
+./mrskew-snmfc-savings-R2.sh: line 77: 1287983 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb1_ora_25115_PF-6ms-300.trc
+rows: 300
+./mrskew-snmfc-savings-R2.sh: line 77: 1287995 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb2_ora_4441_PF-6ms-400.trc
+rows: 400
+./mrskew-snmfc-savings-R2.sh: line 77: 1288004 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+########################################################
+file: trace/latency-6ms/cdb1_ora_25143_PF-6ms-500.trc
+rows: 500
+./mrskew-snmfc-savings-R2.sh: line 77: 1288020 Segmentation fault      (core dumped) ARRAYSIZE=${arraySizeCompare[$rows]} mrskew --rc=snmfc-savings-2.rc --where1="\$sqlid eq q{$sqlID}" $traceFile
+
+LogFile: logs/mrskew-rpt-R2-6ms-2024-02-12_09-23-56.log
+

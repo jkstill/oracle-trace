@@ -1,0 +1,180 @@
+preFetchRows: 1
+setting RowCacheSize = 1
+oraPreFetchMemory: 0
+using ora_prefetch_memory 100
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_11766_PF-12ms-001.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_11766_PF-12ms-001.trc ...
+
+real	36m35.376s
+user	0m6.260s
+sys	0m2.721s
+preFetchRows: 5
+setting RowCacheSize = 5
+oraPreFetchMemory: 0
+using ora_prefetch_memory 500
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_25225_PF-12ms-005.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_25225_PF-12ms-005.trc ...
+
+real	6m4.703s
+user	0m1.314s
+sys	0m0.549s
+preFetchRows: 10
+setting RowCacheSize = 10
+oraPreFetchMemory: 0
+using ora_prefetch_memory 1000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26130_PF-12ms-010.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26130_PF-12ms-010.trc ...
+
+real	3m11.305s
+user	0m0.761s
+sys	0m0.237s
+preFetchRows: 20
+setting RowCacheSize = 20
+oraPreFetchMemory: 0
+using ora_prefetch_memory 2000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26642_PF-12ms-020.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26642_PF-12ms-020.trc ...
+
+real	1m6.030s
+user	0m0.471s
+sys	0m0.063s
+preFetchRows: 50
+setting RowCacheSize = 50
+oraPreFetchMemory: 0
+using ora_prefetch_memory 5000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26829_PF-12ms-050.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26829_PF-12ms-050.trc ...
+
+real	0m20.163s
+user	0m0.210s
+sys	0m0.057s
+preFetchRows: 100
+setting RowCacheSize = 100
+oraPreFetchMemory: 0
+using ora_prefetch_memory 10000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26889_PF-12ms-100.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26889_PF-12ms-100.trc ...
+
+real	0m19.912s
+user	0m0.140s
+sys	0m0.064s
+preFetchRows: 200
+setting RowCacheSize = 200
+oraPreFetchMemory: 0
+using ora_prefetch_memory 20000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26977_PF-12ms-200.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_26977_PF-12ms-200.trc ...
+preFetchRows: 300
+
+real	0m8.243s
+user	0m0.125s
+sys	0m0.031s
+setting RowCacheSize = 300
+oraPreFetchMemory: 0
+using ora_prefetch_memory 30000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27005_PF-12ms-300.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27005_PF-12ms-300.trc ...
+
+real	0m3.830s
+user	0m0.109s
+sys	0m0.024s
+preFetchRows: 400
+setting RowCacheSize = 400
+oraPreFetchMemory: 0
+using ora_prefetch_memory 40000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27028_PF-12ms-400.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27028_PF-12ms-400.trc ...
+
+real	0m3.430s
+user	0m0.106s
+sys	0m0.027s
+preFetchRows: 500
+setting RowCacheSize = 500
+oraPreFetchMemory: 0
+using ora_prefetch_memory 50000
+
+  runtimeSeconds: 1
+ intervalSeconds: 0.01
+      iterations: 10
+..........
+
+server: ora192rac01.jks.com
+tracefile: /u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27049_PF-12ms-500.trc
+
+scp oracle@ora192rac01.jks.com:/u01/app/oracle/diag/rdbms/cdb/cdb1/trace/cdb1_ora_27049_PF-12ms-500.trc ...
+
+real	0m10.428s
+user	0m0.109s
+sys	0m0.041s

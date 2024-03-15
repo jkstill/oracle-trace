@@ -1,0 +1,2 @@
+./mrskew-snmfc-savings.sh: line 58: syntax error near unexpected token `eq'
+./mrskew-snmfc-savings.sh: line 58: `	done < "<( ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile 2>&1 >/dev/null)"'

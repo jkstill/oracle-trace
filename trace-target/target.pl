@@ -261,7 +261,7 @@ print qq{
 
 for  (my $i=1; $i<=$iterations; $i++) {
 	$sth->execute;
-	while ( my  ($owner, $objectName, $objectID, $objectType) = $sth->fetchrow_array ) {
+	while ( my @data = $sth->fetchrow_array ) {
 		;
 	}
 	$sth->finish;

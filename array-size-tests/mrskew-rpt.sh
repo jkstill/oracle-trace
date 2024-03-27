@@ -18,11 +18,13 @@
 
 
 declare RPTTAG=''
+declare dryRun='N'
 
-while getopts t: arg
+while getopts nt: arg
 do
 	case $arg in
 		t) RPTTAG="$OPTARG-";shift;shift;;
+		n) dryRun='Y'; shift;;
 	esac
 done
 
@@ -64,19 +66,6 @@ subBanner () {
 
 sqlID='4y53369cbbaqf'
 
-declare -A arraySizeCompare=(
-	[001]=100
-	[005]=100
-	[010]=100
-	[020]=100
-	[050]=500
-	[100]=500
-	[200]=1000
-	[300]=1000
-	[400]=2000
-	[500]=2000
-)
-
 #for traceFile in $(ls -1 trace/*.trc| sort -t_ -k4)
 : << HOWTOCALL
 
@@ -89,21 +78,37 @@ declare -A arraySizeCompare=(
 HOWTOCALL
 
 
-
 for traceFile in $@
 do
 	rows=$(echo $traceFile| awk -F- '{ print $NF }' | cut -f1 -d\.)
 	banner tracefile: $traceFile  rowCacheSize: $rows
 
+
 	subBanner FETCH Report
-	mrskew  --top=5 --group='$nam . sprintf(q{ : %3.5f},$af)' --gl="FETCH . sprintf(q{%10s},q{acct for})" --where1="\$sqlid eq q{$sqlID} and \$nam eq q{FETCH}"  $traceFile
+	#mrskew  --top=5 --group='$nam . sprintf(q{ : %3.5f},$af)' --gl="FETCH . sprintf(q{%10s},q{acct for})" --where1="\$sqlid eq q{$sqlID} and \$nam eq q{FETCH}"  $traceFile
+	cmd=$(echo mrskew  --top=5 --group="'\$nam . sprintf(q{ : %3.5f},\$af)'" --gl='"FETCH . sprintf(q{%10s},q{acct for})"' --where1='"\$sqlid eq q{$sqlID} and \$nam eq q{FETCH}"'  \$traceFile)
+	if [[ $dryRun == 'Y' ]]; then
+		eval echo $cmd
+	else
+		eval echo $cmd
+		eval $cmd
+	fi
 
 	subBanner SNMFC Report
-	mrskew  --rc=p10.rc --top=0  --where1="\$sqlid eq q{$sqlID}" --name='message from client'  $traceFile
-
-	subBanner SNMFC Savings
-	# desired output is on STDERR
-	ARRAYSIZE=${arraySizeCompare[$rows]} mrskew  --rc=snmfc-savings.rc  --where1="\$sqlid eq q{$sqlID}"  $traceFile >/dev/null
+	#echo mrskew  --rc=p10.rc --top=0  --where1="\$sqlid eq q{$sqlID}" --name='message from client'  $traceFile
+	cmd=$(echo mrskew  --rc=p10.rc --top=0  --where1='"\$sqlid eq q{$sqlID}"' --name="'message from client'"  \$traceFile)
+	# get snmfc duration
+	cmd2=$(echo mrskew  --csv --nohead --nofoot  --where1='"\$sqlid eq q{$sqlID}"' --name="'message from client'"  \$traceFile  \| cut -d, -f2)
+	if [[ $dryRun == 'Y' ]]; then
+		eval echo $cmd
+		eval echo $cmd2
+	else
+		eval echo $cmd
+		eval $cmd
+		eval echo $cmd2
+		duration=$(eval $cmd2)
+		echo "Array Size: $rows  Duration: $duration"
+	fi
 
 done
 

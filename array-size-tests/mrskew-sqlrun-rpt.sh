@@ -27,7 +27,7 @@ do
 
 	#mrskew --where1='$sqlid =~ /07tutd2xkaqms/' --nohead --csv  --nofoot --name='FETCH'  $file  | cut -d, -f2
 
-	arraySize=$(mrskew --top=0  --nohistogram --where1='$sqlid =~ /07tutd2xkaqms/' --group='$r . q{:} . $line' --nohead  --nofoot --name='FETCH' $file | cut -f1 -d: | sort  | uniq -c  | tail -1 | awk '{ print $2 }')
+	arraySize=$(mrskew --top=0  --nohistogram --where1='$sqlid =~ /07tutd2xkaqms/' --group='$r . q{:} . $line' --nohead  --nofoot --name='FETCH' $file | cut -f1 -d: | sort  | uniq -c | sort -n | tail -1 | awk '{ print $2 }')
 
 	export durationSNMFC=$(mrskew --rc=cull-snmfc.rc --where1='$sqlid =~ /07tutd2xkaqms/' --nohead --csv  --nofoot --name='message from client'  $file  | cut -d, -f2)
 	#echo "durationSNMFC:  $durationSNMFC"

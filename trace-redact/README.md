@@ -25,7 +25,81 @@ Or, use this to group by obfuscated bind values:
 grep -E '^\s+value=' test.trc | sort | uniq -c | sort -t- -k2 -n
 ```
 
+Or, just use redact.pl, which will redact all text that is in single quotes, and not a tracefile statistic line.
+ie.  redacts bind values and hard coded SQL.
+
+### Example of using redact.pl
+
+Bind values:
+
+```text
+$  l -h trace/cdb2_ora_7948_SQL-NO-RC-OPCOUNT-20230505152329.trc
+-r--r----- 1 jkstill dba 15M 2023-06-11 11:53 trace/cdb2_ora_7948_SQL-NO-RC-OPCOUNT-20230505152329.trc
+
+$  time ./redact.pl <  trace/cdb2_ora_7948_SQL-NO-RC-OPCOUNT-20230505152329.trc  > x
+
+real    0m0.321s
+user    0m0.286s
+sys     0m0.021s
+
+
+$  diff trace/cdb2_ora_7948_SQL-NO-RC-OPCOUNT-20230505152329.trc x | head -20
+44c44
+<   value="2230"
+---
+>   value="2707"
+49c49
+<   value="5/9/2023 0:0:0"
+---
+>   value="9S0F4436 2:7:2"
+65c65
+<   value="2231"
+---
+>   value="4801"
+70c70
+<   value="5/9/2023 0:0:0"
+---
+>   value="9S0F4436 2:7:2"
+83c83
+<   value="2234"
+---
+>   value="3107"
+```
+
+Hard coded SQL: (redacting an already redacted trace file)
+
+```text
+$  l -h trace/ORCL_ora_160755-redacted.trc
+-rwxr-xr-x 1 jkstill dba 89M 2024-08-02 08:36 trace/ORCL_ora_160755-redacted.trc
+
+$  time ./redact.pl <  trace/CSRIPRD_ora_160755-redacted.trc > x
+
+real    0m1.167s
+user    0m0.991s
+sys     0m0.099s
+
+91c91
+<                             WHERE OD.BILL_DATE != '8108-62-21'
+---
+>                             WHERE OD.BILL_DATE != '0122-35-95'
+99c99
+<                             WHERE OD.BILL_DATE != '5229-24-68'
+---
+>                             WHERE OD.BILL_DATE != '0160-51-37'
+106c106
+<                                WHERE P.STATUS IN ('OZcZ','ALkJ','yTLS','yTMF','xfBB','pChX')
+---
+>                                WHERE P.STATUS IN ('TZcZ','AzXh','zfLq','Mxqd','xpBB','wNqX')
+110c110
+<                                                      AND B.STATUS IN ('AUeC','AhcV','OcYS','hoCB','OgBB','DyRo'))
+---
+>                                                      AND B.STATUS IN ('AULT','thlq','mrpl','hxHR','JVBB','DsUo'))
+```
+
+
 ### Example of Date, Timestamp and Integer bind values obfustated
+
+This is using bind-redact.pl
 
 ```text
 $ cp trace/base-test.trc test.trc; chmod u+w test.trc

@@ -3,7 +3,10 @@
 # poc to interpret times in the sqltrace file
 #
 
-set -u
+# set -u will break the array assignments
+#set -u
+
+: ${VERBOSE:=0}
 
 traceFile=$1
 [ -z "$traceFile" ] && echo "Usage: $0 <tracefile>" && exit 1
@@ -19,20 +22,24 @@ dateRegex='[0-9]{4}-[0-9]{2}-[0-9]{2}'
 timeRegex='[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}'
 timezoneRegex='\+[0-9]{2}:[0-9]{2}'
 
-echo "${dateRegex}T${timeRegex}${timezoneRegex}"
+display () {
+	[ $VERBOSE -eq 1 ] && echo "$*"
+}
+
+#display "${dateRegex}T${timeRegex}${timezoneRegex}"
 
 # '^*** [0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}\+[0-9]{2}:[0-9]{2}$' 
 startTime=$(grep -E "^*** ${dateRegex}T${timeRegex}${timezoneRegex}$" $traceFile | head -1 | awk '{print $2}') \
 	|| { echo "Error: no timestamp found"; exit 1; }
 
 # convert the timestamp to a format that date can understand
-echo "Start time: $startTime"
+display "Start time: $startTime"
 startTime=$(date -d "$startTime" '+%FT%T.%N')
-echo "Start time: $startTime"
+display "Start time: $startTime"
  
 # now convert that time to epoch
 startTimeEpoch=$(date -d "$startTime" '+%s.%N')
-echo "Start time epoch: $startTimeEpoch"
+display "Start time epoch: $startTimeEpoch"
 
 waitRegex="^WAIT.*nam='([^']+)'.*tim=([0-9]+)"
 eventRegex="^([A-Z]+).*tim=([0-9]+)"
@@ -43,7 +50,7 @@ eventRegex="^([A-Z]+).*tim=([0-9]+)"
 # for purposes of establishing timestamps, the first tim= is equivalent to the start time
 startTimeMicroSecs=$(grep -E 'tim=[0-9]{1,}' $traceFile | head -1 | awk -F'tim=' '{print $2}')
 prevTimeMicroSecs=$startTimeMicroSecs
-echo "First time: $startTimeMicroSecs"
+display "First time: $startTimeMicroSecs"
 
 
 declare snmfcThreshold=1000000
@@ -57,6 +64,8 @@ declare computedElapsedMicroSecs=0
 # work usecs is the total time minus the snmfc times that are skipped due to exceeding the threshold
 declare workMicroSecs=0
 declare lineType=''
+
+declare -A accumTimes
 
 # now read the file getting the tim= values
 while read -r line
@@ -85,15 +94,18 @@ do
 
 	# skip SQL*Net message from client lines if the time is greater than the threshold
 	[[ $intervalFromPrevMicroSecs -gt $snmfcThreshold ]] && [[ $line =~ 'message from client' ]] && {
-		echo "Skipping SQL*Net message from client"
+		display "Skipping SQL*Net message from client"
 		prevTimeMicroSecs=$currTimeMicroSecs
 		continue
 	}
 
 	if [[ $lineType == 'WAIT' ]]; then
-		echo "WAIT time: $currTimeMicroSecs name: $nam"
+		display "WAIT time: $currTimeMicroSecs name: $nam"
+		key="WAIT: $nam"
+		(( accumTimes[$key] += intervalFromPrevMicroSecs ))
 	else
-		echo "$event: time: $currTimeMicroSecs"
+		display "$event: time: $currTimeMicroSecs"
+		(( accumTimes[$event] += intervalFromPrevMicroSecs ))
 	fi
 
 	(( workMicroSecs += intervalFromPrevMicroSecs ))
@@ -102,14 +114,14 @@ do
 	#echo "scale=9; $startTimeEpoch + ( $intervalFromPrevMicroSecs / 1000000) " 
 	currTimestamp=$(date -d "@$currentEpochSeconds" '+%FT%T.%N')
 
-	echo "        Start Time: $startTime"
-	echo "  Start time epoch: $startTimeEpoch"
-	echo "  Start time usecs: $startTimeMicroSecs"
-	echo "Current time usecs: $currTimeMicroSecs"
-	echo " Elapsed time secs: $elapsedFromStartMicroSecs"
-	echo "Interval from prev: $intervalFromPrevMicroSecs"
-	echo "Current time epoch: $currTimestamp"
-	echo
+	display "        Start Time: $startTime"
+	display "  Start time epoch: $startTimeEpoch"
+	display "  Start time usecs: $startTimeMicroSecs"
+	display "Current time usecs: $currTimeMicroSecs"
+	display " Elapsed time secs: $elapsedFromStartMicroSecs"
+	display "Interval from prev: $intervalFromPrevMicroSecs"
+	display "Current time epoch: $currTimestamp"
+	display
 
 	(( computedElapsedMicroSecs += intervalFromPrevMicroSecs ))
 
@@ -121,7 +133,14 @@ echo
 echo "   Total elapsed usecs: $elapsedFromStartMicroSecs"
 echo "Computed elapsed usecs: $computedElapsedMicroSecs"
 echo "    Work elapsed usecs: $workMicroSecs"
+echo
  
+
+for key in "${!accumTimes[@]}"
+do
+	seconds=$(echo "scale=9; ${accumTimes[$key]} / 1000000" | bc)
+	printf "%50s: %12.6f\n" "$key" $seconds
+done | awk '{ print $NF, $0 }' | sort -nr | cut -d' ' -f2-
 
 
 

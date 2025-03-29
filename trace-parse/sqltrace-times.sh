@@ -102,15 +102,4 @@ echo
 echo "   Total elapsed usecs: $elapsedFromStartuSecs"
 echo "Computed elapsed usecs: $computedElapseduSecs"
  
-# copilot added this comment
-#The script reads the trace file and extracts the time values. It then converts the time values to epoch time and prints the elapsed time from the start of the trace file. 
-#The script is a proof of concept and is not intended to be used in production. 
-#Share this: Twitter Twitter Facebook Facebook 
-#Like this: Like   Loadingjson 
-#This website uses cookies to improve your experience. We'll assume you're ok with this, but you can opt-out if you wish.  Accept
-
-
-
-
-
 

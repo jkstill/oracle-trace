@@ -7,6 +7,10 @@
 #set -u
 
 : ${VERBOSE:=0}
+: ${SQLID:=''}
+
+#echo "SQLID: $SQLID"
+#exit
 
 traceFile=$1
 [ -z "$traceFile" ] && echo "Usage: $0 <tracefile>" && exit 1
@@ -41,8 +45,12 @@ display "Start time: $startTime"
 startTimeEpoch=$(date -d "$startTime" '+%s.%N')
 display "Start time epoch: $startTimeEpoch"
 
-waitRegex="^WAIT.*nam='([^']+)'.*tim=([0-9]+)"
-eventRegex="^([A-Z]+).*tim=([0-9]+)"
+#waitRegex="^WAIT.*nam='([^']+)'.*tim=([0-9]+)"
+#eventRegex="^([A-Z]+).*tim=([0-9]+)"
+
+waitRegex="^WAIT\s+#([0-9]):.*nam='([^']+)'.*tim=([0-9]+)"
+eventRegex="^([A-Z]+)\s+#([0-9]+):.*tim=([0-9]+)"
+parsingRegex="^PARSING IN CURSOR \#([0-9]+) len=([0-9]+) dep=([0-9]+) uid=([0-9]+) oct=([0-9]+) lid=([0-9]+) tim=([0-9]+) hv=([0-9]+) ad='([^']+)' sqlid='([^']+)'"
 
 # now get the first 'tim=' value from the file
 # this will be the first time after the start time
@@ -64,6 +72,7 @@ declare computedElapsedMicroSecs=0
 # work usecs is the total time minus the snmfc times that are skipped due to exceeding the threshold
 declare workMicroSecs=0
 declare lineType=''
+declare cursorNumber=''
 
 declare -A accumTimes
 
@@ -74,19 +83,60 @@ do
 	# WAIT lines have ^WAIT...nam='some name'...tim=1234
 	# all other lines have ^[EXEC|FETCH|PARSE|...)...tim=1234
 	# For WAITS we want the WAIT, the event (nam=) and the time
-	
+	event=''
+	lineType=''
+	cursor=''
+
 	if [[ $line =~ $waitRegex ]]; then
-		nam=${BASH_REMATCH[1]}
-		currTimeMicroSecs=${BASH_REMATCH[2]}
+		cursor=${BASH_REMATCH[1]}
+		nam=${BASH_REMATCH[2]}
+		currTimeMicroSecs=${BASH_REMATCH[3]}
 		lineType='WAIT'
 	elif [[ $line =~ $eventRegex ]]; then
 		event=${BASH_REMATCH[1]}
-		currTimeMicroSecs=${BASH_REMATCH[2]}
+		cursor=${BASH_REMATCH[2]}
+		currTimeMicroSecs=${BASH_REMATCH[3]}
+		lineType='EVENT'
+	elif [[ $line =~ $parsingRegex ]]; then
+		event='PARSING'
+		cursor=${BASH_REMATCH[1]}
+		currTimeMicroSecs=${BASH_REMATCH[7]}
 		lineType='EVENT'
 	else
 		echo "Error: line did not match expected format"
 		echo "line: $line"
+		echo "waitRegex: $waitRegex"
+		echo "eventRegex: $eventRegex"
 		exit 1
+	fi
+
+	# parsing in cursor line
+	# PARSING IN CURSOR #140633838757592 len=226 dep=1 uid=0 oct=3 lid=0 tim=16593273447539 hv=3008674554 ad='47b1e5df8' sqlid='5dqz0hqtp9fru'
+	if [[ -n $SQLID ]] && [[ $event == 'PARSING' ]]; then
+		# if sqlid is found, then get the cursor number
+		[[ $line =~ "sqlid='$SQLID'" ]] || continue
+		[[ $line =~ 'CURSOR '\#([0-9]+) ]] && cursorNumber=${BASH_REMATCH[1]}
+		display "line: $line"
+		display "cursorNumber: $cursorNumber"
+		# the cursor number could change if the cursor is closed and reopened or the SQL is re-parsed
+		[[ -n $cursorNumber ]] && echo "Cursor number: $cursorNumber"
+		[[ -z $cursorNumber ]] && { echo "Error: cursor number not found"; exit 1; }
+
+		prevTimeMicroSecs=$currTimeMicroSecs
+		continue
+	elif [[ $event ==	'PARSING' ]]; then
+		prevTimeMicroSecs=$currTimeMicroSecs
+		continue
+	fi
+
+	if [[ -n $SQLID ]] && [[ -n $cursorNumber ]] && [[ $cursor != $cursorNumber ]] ; then
+		#[[ $cursor != $cursorNumber ]] && echo "cursors are different: $cursor != $cursorNumber"
+		#[[ $cursor == $cursorNumber ]] && echo "cursors are the same: $cursor == $cursorNumber"
+		#[[ $cursor != $cursorNumber ]] &&
+		#echo "Skipping cursor: $cursor"
+		#echo "   cursorNumber: $cursorNumber"
+		prevTimeMicroSecs=$currTimeMicroSecs
+		continue
 	fi
 
 	(( elapsedFromStartMicroSecs = $currTimeMicroSecs - $startTimeMicroSecs ))
@@ -114,11 +164,13 @@ do
 	#echo "scale=9; $startTimeEpoch + ( $intervalFromPrevMicroSecs / 1000000) " 
 	currTimestamp=$(date -d "@$currentEpochSeconds" '+%FT%T.%N')
 
+	display "             Event: $event"
+	display "            Cursor: $cursor"
 	display "        Start Time: $startTime"
 	display "  Start time epoch: $startTimeEpoch"
 	display "  Start time usecs: $startTimeMicroSecs"
 	display "Current time usecs: $currTimeMicroSecs"
-	display " Elapsed time secs: $elapsedFromStartMicroSecs"
+	display "Elapsed time usecs: $elapsedFromStartMicroSecs"
 	display "Interval from prev: $intervalFromPrevMicroSecs"
 	display "Current time epoch: $currTimestamp"
 	display

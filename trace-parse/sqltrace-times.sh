@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # poc to interpret times in the sqltrace file
-#
+# this is only known to work with 19c at this time
+# it may work with 12c and later
 
 # set -u will break the array assignments
 #set -u

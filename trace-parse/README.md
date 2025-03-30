@@ -108,4 +108,28 @@ Computed elapsed usecs: 15878
 
 ```
 
+## sqltrace-sql.sh
+
+Report the SQL statements in a trace file.
+
+```bash
+$  ./sqltrace-sql.sh a/72899.trc
+
+$  ./sqltrace-sql.sh  a/15630.trc| head
+SQLID: 865qwpcdyggkk
+select spare6 from user$ where user#=:1
+---------------------------------
+...
+```
+
+Report just a single SQL ID:
+
+```bash
+$  SQLID='865qwpcdyggkk'  ./sqltrace-sql.sh  a/15630.trc
+SQLID: 865qwpcdyggkk
+select spare6 from user$ where user#=:1
+---------------------------------
+```
+
+
 

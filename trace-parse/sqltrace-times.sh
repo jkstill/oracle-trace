@@ -45,10 +45,8 @@ display "Start time: $startTime"
 startTimeEpoch=$(date -d "$startTime" '+%s.%N')
 display "Start time epoch: $startTimeEpoch"
 
-#waitRegex="^WAIT.*nam='([^']+)'.*tim=([0-9]+)"
-#eventRegex="^([A-Z]+).*tim=([0-9]+)"
-
-waitRegex="^WAIT\s+#([0-9]):.*nam='([^']+)'.*tim=([0-9]+)"
+#WAIT #140606563493592: nam='PGA memory operation' ela= 8 p1=65536 p2=1 p3=0 obj#=-1 tim=16592944510045
+waitRegex="^WAIT\s+#([0-9]+):.*nam='([^']+)'.*tim=([0-9]+)"
 eventRegex="^([A-Z]+)\s+#([0-9]+):.*tim=([0-9]+)"
 parsingRegex="^PARSING IN CURSOR \#([0-9]+) len=([0-9]+) dep=([0-9]+) uid=([0-9]+) oct=([0-9]+) lid=([0-9]+) tim=([0-9]+) hv=([0-9]+) ad='([^']+)' sqlid='([^']+)'"
 
@@ -87,21 +85,38 @@ do
 	lineType=''
 	cursor=''
 
+	display "============================="
+	display "line: $line"
+
 	if [[ $line =~ $waitRegex ]]; then
-		cursor=${BASH_REMATCH[1]}
-		nam=${BASH_REMATCH[2]}
-		currTimeMicroSecs=${BASH_REMATCH[3]}
+		cursor="${BASH_REMATCH[1]}"
+		nam="${BASH_REMATCH[2]}"
+		[[ -z $nam ]] && { echo "Error: nam not found"; exit 1; }
+		currTimeMicroSecs="${BASH_REMATCH[3]}"
 		lineType='WAIT'
+		display "lineType: $lineType"
 	elif [[ $line =~ $eventRegex ]]; then
-		event=${BASH_REMATCH[1]}
-		cursor=${BASH_REMATCH[2]}
-		currTimeMicroSecs=${BASH_REMATCH[3]}
+		event="${BASH_REMATCH[1]}"
+		[[ -z $event ]] && { echo "Error: event not found"; exit 1; }
+		cursor="${BASH_REMATCH[2]}"
+		currTimeMicroSecs="${BASH_REMATCH[3]}"
 		lineType='EVENT'
+		display "lineType: $lineType"
 	elif [[ $line =~ $parsingRegex ]]; then
 		event='PARSING'
-		cursor=${BASH_REMATCH[1]}
-		currTimeMicroSecs=${BASH_REMATCH[7]}
+		cursor="${BASH_REMATCH[1]}"
+		currTimeMicroSecs="${BASH_REMATCH[7]}"
 		lineType='EVENT'
+		display "lineType: $lineType"
+	# commits
+	elif [[ $line =~ 'XCTEND' ]]; then
+		# example XCTEND line: XCTEND rlbk=0, rd_only=0, tim=16593273447539
+		# parse the tim value
+		[[ $line =~ 'tim=([0-9]+)' ]] && prevTimeMicroSecs=${BASH_REMATCH[1]}
+		# no time recorded for this event
+		(( accumTimes['XCTEND'] = 0 ))
+		#echo "EXCTEND line: $line"
+		continue
 	else
 		echo "Error: line did not match expected format"
 		echo "line: $line"
@@ -151,11 +166,26 @@ do
 
 	if [[ $lineType == 'WAIT' ]]; then
 		display "WAIT time: $currTimeMicroSecs name: $nam"
+		[[ -z $nam ]] && { echo "Error: nam not found"; exit 1; }
 		key="WAIT: $nam"
-		(( accumTimes[$key] += intervalFromPrevMicroSecs ))
-	else
+		[[ $key == 'WAIT' ]] && { 
+			echo "Error: key is WAIT"
+			exit 1
+		}
+		(( accumTimes["$key"] += intervalFromPrevMicroSecs ))
+	elif [[ $lineType == 'EVENT' ]]; then
 		display "$event: time: $currTimeMicroSecs"
-		(( accumTimes[$event] += intervalFromPrevMicroSecs ))
+		[[ -z $event ]] && { echo "Error: event not found"; exit 1; }
+		[[ $event == 'WAIT' ]] && { 
+			echo "Error: event is WAIT"
+			echo "line: $line"
+			exit 1
+		}
+		(( accumTimes["$event"] += intervalFromPrevMicroSecs ))
+	else
+		echo "Error: unknown line type"
+		echo "line: $line"
+		exit 1
 	fi
 
 	(( workMicroSecs += intervalFromPrevMicroSecs ))
@@ -187,10 +217,9 @@ echo "Computed elapsed usecs: $computedElapsedMicroSecs"
 echo "    Work elapsed usecs: $workMicroSecs"
 echo
  
-
 for key in "${!accumTimes[@]}"
 do
-	seconds=$(echo "scale=9; ${accumTimes[$key]} / 1000000" | bc)
+	seconds=$(echo "scale=9; ${accumTimes["$key"]} / 1000000" | bc)
 	printf "%50s: %12.6f\n" "$key" $seconds
 done | awk '{ print $NF, $0 }' | sort -nr | cut -d' ' -f2-
 

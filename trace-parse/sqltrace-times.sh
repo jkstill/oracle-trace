@@ -4,6 +4,18 @@
 # this is only known to work with 19c at this time
 # it may work with 12c and later
 
+: << 'COMMENT'
+
+To be accurate, the waits and events following an WAIT or EVENT should be attributed to the next SQL Execution, Fetch, or Parse event.
+
+for instance, 'db file sequential read' should be attributed to the next 'FETCH' event.
+
+As this script is only showing totals by default, it does not matter.
+
+Is a single SQL is filtered, then it will matter.
+
+COMMENT
+
 # set -u will break the array assignments
 #set -u
 
@@ -75,9 +87,69 @@ declare computedElapsedMicroSecs=0
 # work usecs is the total time minus the snmfc times that are skipped due to exceeding the threshold
 declare workMicroSecs=0
 declare lineType=''
-declare cursorNumber=''
-
+declare sqlIdCursorNumber=''
+declare currCursorNumber='NOOP'
+declare prevCursorNumber='POON'
+# txTime is a scrath buffer to hold the time for the current transaction
+# it will be reset to 0 when a new cursor is executed
+declare -A txTime
+declare -A sqlIdTime
 declare -A accumTimes
+
+: << 'COMMENT'
+
+Filtering on a single SQLID will require two passes.
+
+As this is a Bash script, there are no complex data structures like a hash of arrays.
+
+The first pass will find the cursor number(s) for the SQLID.
+
+The second pass will accumulate the times for the cursor numbers.
+
+
+COMMENT
+
+declare -a cursorNumbers
+
+cursorRegex=''
+
+[[ -n $SQLID ]] && {
+	# first pass
+	#
+	while read -r line
+	do
+		#echo $line
+		if [[ $line =~ $parsingRegex ]]; then
+			cursor="${BASH_REMATCH[1]}"
+			currSqlID="${BASH_REMATCH[10]}"
+			[[ $currSqlID == $SQLID ]] && cursorNumbers+=($cursor)
+			#cursorNumbers+=($cursor)
+		else
+			echo "Error: line did not match expected format"
+			echo "line: $line"
+			exit 1
+		fi
+
+		#echo "Cursor: $cursor SQLID: $currSqlID"
+
+	done < <( grep -E "$parsingRegex" $traceFile )
+
+	for cursor in "${cursorNumbers[@]}"
+	do
+		#echo "Cursor: $cursor"
+		cursorRegex+="|#${cursor}"
+	done
+
+	# exit if cursorRegex is empty
+	[[ -z $cursorRegex ]] && { echo "Error: no cursor numbers found for SQLID $SQLID"; exit 1; }
+
+}
+
+# remove the leading pipe
+# this is the regex to match the cursor numbers
+cursorRegex=${cursorRegex#|}
+#echo "Cursor regex: $cursorRegex"
+#exit
 
 # now read the file getting the tim= values
 while read -r line
@@ -91,8 +163,11 @@ do
 	cursor=''
 	elapsedFromTrace=0
 
+	[[ -n SQLID ]] && [[ ! $line =~ $cursorRegex ]] && continue
+
 	display "============================="
 	display "line: $line"
+
 
 	# WAIT #140048500737752: nam='PGA memory operation' ela= 6 p1=65536 p2=1 p3=0 obj#=-1 tim=16592510109714
 	if [[ $line =~ $waitRegex ]]; then
@@ -116,6 +191,7 @@ do
 		event='PARSING'
 		cursor="${BASH_REMATCH[1]}"
 		currTimeMicroSecs="${BASH_REMATCH[7]}"
+		elapsedFromTrace=0 # no time recorded for this event
 		lineType='EVENT'
 		display "lineType: $lineType"
 	# commits
@@ -136,36 +212,6 @@ do
 	fi
 
 
-	# parsing in cursor line
-	# PARSING IN CURSOR #140633838757592 len=226 dep=1 uid=0 oct=3 lid=0 tim=16593273447539 hv=3008674554 ad='47b1e5df8' sqlid='5dqz0hqtp9fru'
-	if [[ -n $SQLID ]] && [[ $event == 'PARSING' ]]; then
-		# if sqlid is found, then get the cursor number
-		[[ $line =~ "sqlid='$SQLID'" ]] || continue
-		[[ $line =~ 'CURSOR '\#([0-9]+) ]] && cursorNumber=${BASH_REMATCH[1]}
-		display "line: $line"
-		display "cursorNumber: $cursorNumber"
-		# the cursor number could change if the cursor is closed and reopened or the SQL is re-parsed
-		[[ -n $cursorNumber ]] && echo "Cursor number: $cursorNumber"
-		[[ -z $cursorNumber ]] && { echo "Error: cursor number not found"; exit 1; }
-
-		prevTimeMicroSecs=$currTimeMicroSecs
-		continue
-	elif [[ $event ==	'PARSING' ]]; then
-		prevTimeMicroSecs=$currTimeMicroSecs
-		continue
-	fi
-
-
-	if [[ -n $SQLID ]] && [[ -n $cursorNumber ]] && [[ $cursor != $cursorNumber ]] ; then
-		#[[ $cursor != $cursorNumber ]] && echo "cursors are different: $cursor != $cursorNumber"
-		#[[ $cursor == $cursorNumber ]] && echo "cursors are the same: $cursor == $cursorNumber"
-		#[[ $cursor != $cursorNumber ]] &&
-		#echo "Skipping cursor: $cursor"
-		#echo "   cursorNumber: $cursorNumber"
-		prevTimeMicroSecs=$currTimeMicroSecs
-		continue
-	fi
-
 	# skip SQL*Net message from client lines if the time is greater than the threshold
 	#[[ $intervalFromPrevMicroSecs -ge $snmfcThreshold ]] && [[ $line =~ 'message from client' ]] && {
 	[[ $elapsedFromTrace -ge $snmfcThreshold ]] && [[ $line =~ 'message from client' ]] && {
@@ -177,6 +223,7 @@ do
 	(( elapsedFromStartMicroSecs = $currTimeMicroSecs - $startTimeMicroSecs ))
 	(( intervalFromPrevMicroSecs = $currTimeMicroSecs - $prevTimeMicroSecs ))
 
+	key=''
 	if [[ $lineType == 'WAIT' ]]; then
 		display "WAIT time: $currTimeMicroSecs name: $nam"
 		[[ -z $nam ]] && { echo "Error: nam not found"; exit 1; }
@@ -185,23 +232,23 @@ do
 			echo "Error: key is WAIT"
 			exit 1
 		}
-		#(( accumTimes["$key"] += intervalFromPrevMicroSecs ))
-		(( accumTimes["$key"] += elapsedFromTrace ))
 	elif [[ $lineType == 'EVENT' ]]; then
 		display "$event: time: $currTimeMicroSecs"
 		[[ -z $event ]] && { echo "Error: event not found"; exit 1; }
+		key="$event"
 		[[ $event == 'WAIT' ]] && { 
 			echo "Error: event is WAIT"
 			echo "line: $line"
 			exit 1
 		}
-		#(( accumTimes["$event"] += intervalFromPrevMicroSecs ))
-		(( accumTimes["$event"] += elapsedFromTrace ))
 	else
 		echo "Error: unknown line type"
 		echo "line: $line"
 		exit 1
 	fi
+
+	#(( accumTimes["$key"] += intervalFromPrevMicroSecs ))
+	(( accumTimes["$key"] += elapsedFromTrace ))
 
 	(( totalElapsedFromTrace += elapsedFromTrace ))
 	#echo "Elapsed from trace: $totalElapsedFromTrace"
@@ -212,7 +259,7 @@ do
 	[[ VERBOSE -eq 1 ]] && currTimestamp=$(date -d "@$currentEpochSeconds" '+%FT%T.%N')
 
 	display "             Event: $event"
-	display "            Cursor: $cursor"
+	display "            Cursor: $currCursorNumber"
 	display "        Start Time: $startTime"
 	display "  Start time epoch: $startTimeEpoch"
 	display "  Start time usecs: $startTimeMicroSecs"
@@ -227,7 +274,7 @@ do
 
 	prevTimeMicroSecs=$currTimeMicroSecs
 
-done < <( grep -E 'tim=[0-9]{1,}' $traceFile )
+done < <( grep -E "tim=[0-9]{1,}" $traceFile )
 
 echo
 echo "   Total elapsed usecs: $elapsedFromStartMicroSecs"
@@ -238,11 +285,22 @@ echo
 echo -n "Elapsed from trace: "; printf "%12.6f\n" $(echo "scale=6; $totalElapsedFromTrace / 1000000" | bc)
 echo
  
+totalSeconds=0
+
+
+for key in "${!accumTimes[@]}"
+do
+	seconds=${accumTimes["$key"]} 
+	(( totalSeconds += $seconds ))
+done
+
 for key in "${!accumTimes[@]}"
 do
 	seconds=$(echo "scale=9; ${accumTimes["$key"]} / 1000000" | bc)
 	printf "%50s: %12.6f\n" "$key" $seconds
 done | awk '{ print $NF, $0 }' | sort -nr | cut -d' ' -f2-
+
+printf "%50s: %12.6f\n" "Total Seconds" $(echo "scale=9; $totalSeconds / 1000000" | bc)
 
 
 

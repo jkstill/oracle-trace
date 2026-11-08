@@ -2,6 +2,9 @@
 Tracefile Redact
 ================
 
+## TODO:
+
+- redact file headers, such as the username, machine name, etc.
 
 ## TLDR
 
